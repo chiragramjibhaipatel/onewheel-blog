@@ -11,3 +11,14 @@ export async function getPosts() {
     return await prisma.post.findMany();
     
 }
+
+export async function getPost(slug) {
+    console.log("getPost", slug);
+    
+    const newLocal = await prisma.post.findUnique({ where: { slug } });
+    console.log(newLocal);
+    
+    return newLocal
+
+
+}
