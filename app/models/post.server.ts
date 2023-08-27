@@ -22,3 +22,9 @@ export async function getPost(slug) {
 
 
 }
+
+export async function createPost(post) {
+    return await prisma.post.create({data: post})
+    
+    
+}
