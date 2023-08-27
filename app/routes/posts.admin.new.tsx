@@ -2,13 +2,13 @@ import { redirect, type ActionFunction, type ActionArgs } from "@remix-run/node"
 import { Form } from "@remix-run/react";
 import { createPost } from "~/models/post.server";
 
-export async function action({ request }: ActionArgs) {
+export const action: ActionFunction = async ({request}: ActionArgs) => {
   const body = Object.fromEntries(await request.formData());
   await createPost(body);
-
-
   return redirect("/posts/admin");
+
 }
+
 
 const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`
 export default function NewPostRoute() {
