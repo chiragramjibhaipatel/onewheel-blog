@@ -21,16 +21,16 @@ export default function PostRoute(  ){
     return (
         <main>
             <h1>Posts</h1> 
-            <Link to="admin" className="text-red-600 underline">Admin</Link>
+            <Link to="admin"  className="text-red-600 underline">Admin</Link>
             <ul>
                 {posts.map(post => {
                     return (
-                        <li key={post.slug}>
-                            <Link to={post.slug}>
-                            {post.title}
-                            </Link>
-                        </li>
-                    )
+                      <li key={post.slug}>
+                        <Link prefetch="intent" to={post.slug}>
+                          {post.title}
+                        </Link>
+                      </li>
+                    );
                 })}
                 </ul>
         </main>
