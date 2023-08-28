@@ -1,3 +1,4 @@
+import type { Post } from "@prisma/client";
 import {prisma} from "~/db.server"
 
 export async function getPostListings(){
@@ -12,7 +13,7 @@ export async function getPosts() {
     
 }
 
-export async function getPost(slug) {
+export async function getPost(slug: string) {
     console.log("getPost", slug);
     
     const newLocal = await prisma.post.findUnique({ where: { slug } });
@@ -23,7 +24,7 @@ export async function getPost(slug) {
 
 }
 
-export async function createPost(post) {
+export async function createPost(post: Pick<Post, 'slug' | 'title' | 'markdown'>) {
     return await prisma.post.create({data: post})
     
     

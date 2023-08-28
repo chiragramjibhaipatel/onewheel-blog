@@ -13,6 +13,7 @@ type LoaderData = {
 export const loader: LoaderFunction = async ({params}) => {
   const {slug} = params;
   invariant(slug, `slug is not defined`)
+  invariant(typeof slug === 'string', 'slug must be a string')
   const post = await getPost(slug);
   invariant(post, `post not found: ${slug}`)
   const html = marked(post?.markdown)
