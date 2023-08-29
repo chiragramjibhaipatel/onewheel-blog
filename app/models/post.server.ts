@@ -29,3 +29,9 @@ export async function createPost(post: Pick<Post, 'slug' | 'title' | 'markdown'>
     
     
 }
+
+export async function updatePost(slug: string, post: Pick<Post, 'slug' | 'title' | 'markdown'>) {
+    return await prisma.post.update({data: post, where: {slug}})
+    
+    
+}
