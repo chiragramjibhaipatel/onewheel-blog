@@ -1,40 +1,43 @@
-import { Link, useLoaderData } from "@remix-run/react"
-import type {LoaderFunction } from "@remix-run/node"
-import {json} from "@remix-run/node"
-import { getPostListings } from "~/models/post.server"
-import { useOptionalAdminUser } from "~/utils"
+import { Link, useLoaderData } from "@remix-run/react";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { getPostListings } from "~/models/post.server";
+import { useOptionalAdminUser } from "~/utils";
 
 type LoaderData = {
-    posts: Awaited<ReturnType<typeof getPostListings>>
-}
+  posts: Awaited<ReturnType<typeof getPostListings>>;
+};
 
-export const loader : LoaderFunction = async () => {
-    const posts = await getPostListings();
+export const loader: LoaderFunction = async () => {
+  const posts = await getPostListings();
 
-   return json<LoaderData>({posts})
-}
+  return json<LoaderData>({ posts });
+};
 
-export default function PostRoute(  ){
+export default function PostRoute() {
+  const { posts } = useLoaderData() as LoaderData;
 
-    const {posts} = useLoaderData() as LoaderData
+  const adminUser = useOptionalAdminUser();
 
-    const adminUser = useOptionalAdminUser()
-
-    return (
-        <main>
-            <h1>Posts</h1> 
-            {adminUser && <Link to="admin"  className="text-red-600 underline">Admin</Link>}
-            <ul>
-                {posts.map(post => {
-                    return (
-                      <li key={post.slug}>
-                        <Link prefetch="intent" to={post.slug}>
-                          {post.title}
-                        </Link>
-                      </li>
-                    );
-                })}
-                </ul>
-        </main>
-    )
+  return (
+    <main>
+      <h1>Posts</h1>
+      {adminUser && (
+        <Link to="admin" className="text-red-600 underline">
+          Admin
+        </Link>
+      )}
+      <ul>
+        {posts.map((post) => {
+          return (
+            <li key={post.slug}>
+              <Link prefetch="intent" to={post.slug}>
+                {post.title}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </main>
+  );
 }

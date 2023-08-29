@@ -61,7 +61,6 @@ export function useOptionalAdminUser() {
   if (!user) return null;
   if (user?.email !== ENV.ADMIN_EMAIL) return null;
   return user;
-  
 }
 
 export function useUser(): User {

@@ -7,8 +7,8 @@ type LoaderData = {
   posts: Awaited<ReturnType<typeof getPostListings>>;
 };
 
-export const loader: LoaderFunction = async ({request}) => {
-  await requireAdminUser(request)
+export const loader: LoaderFunction = async ({ request }) => {
+  await requireAdminUser(request);
   return json({ posts: await getPostListings() });
 };
 
