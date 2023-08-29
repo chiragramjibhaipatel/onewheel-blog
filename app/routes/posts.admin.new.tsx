@@ -35,8 +35,6 @@ export const action: ActionFunction = async ({request}: ActionArgs) => {
 
 }
 
-
-
 const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`
 export default function NewPostRoute() {
 
