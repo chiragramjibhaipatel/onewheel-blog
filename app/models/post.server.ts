@@ -35,3 +35,9 @@ export async function updatePost(slug: string, post: Pick<Post, 'slug' | 'title'
     
     
 }
+
+export async function deletePost(slug: string) {
+    return await prisma.post.delete({where: {slug}})
+    
+    
+}
